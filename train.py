@@ -9,6 +9,8 @@ from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 from azureml.core.run import Run
 from azureml.data.dataset_factory import TabularDatasetFactory
+from azureml.core import Dataset
+from sklearn.model_selection import train_test_split
 
 # TODO: Create TabularDataset using TabularDatasetFactory
 # Data is located at:
@@ -16,16 +18,6 @@ from azureml.data.dataset_factory import TabularDatasetFactory
 
 ### YOUR CODE HERE ###
 ds = Dataset.Tabular.from_delimited_files(path = 'https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv')
-
-x, y = clean_data(ds)
-
-# TODO: Split data into train and test sets.
-x_test, x_train = x.random_split(percentage=0.8, seed=1)
-y_test, y_train = x.random_split(percentage=0.8, seed=1)
-
-
-### YOUR CODE HERE ###a
-
 run = Run.get_context()
 
 def clean_data(data):
@@ -53,10 +45,18 @@ def clean_data(data):
     x_df["poutcome"] = x_df.poutcome.apply(lambda s: 1 if s == "success" else 0)
 
     y_df = x_df.pop("y").apply(lambda s: 1 if s == "yes" else 0)
+    return x_df, y_df
     
 
 def main():
     # Add arguments to script
+    x, y = clean_data(ds)
+
+# TODO: Split data into train and test sets.
+
+    x_train, x_test = train_test_split(x, test_size=0.2)
+    y_train, y_test = train_test_split(y, test_size=0.2)
+
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--C', type=float, default=1.0, help="Inverse of regularization strength. Smaller values cause stronger regularization")
@@ -71,6 +71,9 @@ def main():
 
     accuracy = model.score(x_test, y_test)
     run.log("Accuracy", np.float(accuracy))
+    os.makedirs('outputs',exist_ok=True)
+    joblib.dump(model, 'outputs/model.joblib')
 
 if __name__ == '__main__':
     main()
+
