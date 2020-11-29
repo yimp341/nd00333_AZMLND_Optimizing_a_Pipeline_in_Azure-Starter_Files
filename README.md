@@ -29,11 +29,7 @@ The model was Voting Ensemble which uses as parameters other algorithms itself. 
 
 ## Pipeline comparison
 **Compare the two models and their performance. What are the differences in accuracy? In architecture? If there was a difference, why do you think there was one?**
-Hyperdrive hyperparameter tunning 0.8915 with C=1 and max_iter
+The metric used for both comparissons in both parts of the project was accuracy. Hyperdrive hyperparameter tunning lead us to an accuracy of 0.8915 with parameters given by C=1 and max_iter = 100, while the AutoML module gives us an accuracy of 0.91645. I think hyperdrive should perform better with a best choose of the model whose hyperparameters are supposed to be tunned. In this case, we can see that logistic regression is not the best model to choose.
 
 ## Future work
-**What are some areas of improvement for future experiments? Why might these improvements help the model?**
-
-## Proof of cluster clean up
-**If you did not delete your compute cluster in the code, please complete this section. Otherwise, delete this section.**
-**Image of cluster marked for deletion**
+Now that we know that the best model for predictions in this dataset is Ensemble voting, we could use hyperdrive to compare hyperparameters in VotigEnsemble model, instead of Logistic regression. This might lead us to an even better performance. 
