@@ -28,3 +28,6 @@ The metric used for comparissons in both parts of the project was accuracy. Hype
 
 ## Future work
 Now that we know that the best model for predictions in this dataset is Ensemble voting, we could use hyperdrive to compare hyperparameters in VotigEnsemble model, instead of Logistic regression. This might lead us to an even better performance. 
+
+## Compute target deletion
+
