@@ -20,7 +20,18 @@ Each model is scored and, finally the hyperparameter tunning best model is regis
 The Random parameter sampler is the one which takes the least amount of compute resources. On the other hando, the bandit policy prevents the algorithm to keep evaluating models when acurracy is falling outside an specified range.
 
 ## AutoML
-The model was Voting Ensemble, which uses as parameters other algorithms itself. In this run it used algorithms of XGBoostClassifier, ExtremeRandomTrees and SGD.
+The model was Voting Ensemble, which uses as parameters other algorithms itself. In this run it used algorithms of XGBoostClassifier, ExtremeRandomTrees and SGD. Other parameters obtained from the autoML are the following:
+alpha = 0.001
+Class_weight = 'balanced'
+eta = 0.001
+fit_intercept = True
+l1_ratio =0.8367
+learning_rate = 'constant'
+loss = 'modified huber'
+max_iter = 1000
+n_jobs = 1
+power_t = 0.222
+random_state = None
 
 ## Pipeline comparison
 **Compare the two models and their performance. What are the differences in accuracy? In architecture? If there was a difference, why do you think there was one?**
@@ -29,5 +40,5 @@ The metric used for comparissons in both parts of the project was accuracy. Hype
 ## Future work
 Now that we know that the best model for predictions in this dataset is Ensemble voting, we could use hyperdrive to compare hyperparameters in VotigEnsemble model, instead of Logistic regression. This might lead us to an even better performance. 
 
-## Compute target deletion
+## Proof of compute target clean up 
 <img width="524" alt="Cluster deletion3" src="https://user-images.githubusercontent.com/25666364/100962772-fe69ab00-34f2-11eb-95c7-5cee77020d3d.PNG">
